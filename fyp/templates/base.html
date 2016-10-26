@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>{% block title %}Point Break Weather{% endblock %}</title>
+
+    {% include 'head_css.html' %}
+
+  <style>
+      {% block styles %}
+          .text-align-center{
+          text-align: center;
+          }
+          .jumbotron{
+          background-color: #2b542c;
+          color: #fff;
+          }
+
+      {% endblock %}
+  </style>
+
+  </head>
+
+  <body style="padding-bottom: 40px">
+  {% include 'navbar.html' %}
+    <div class="container">
+
+        {% block jumbo %}
+
+        {% endblock %}
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+  {% include 'base_java_script.html' %}
+  </body>
+</html>

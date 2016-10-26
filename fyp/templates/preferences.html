@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form action="" method="post">{% csrf_token %}
+                <div class="fieldWrapper">
+                    <div id="map" style="height: 400px; width: 550px"></div>
+                    <input id="coordinates" name="coordinates" value="" type="hidden">
+                </div><br>
+                <div class="fieldWrapper">
+                    {{ form.place_name|as_crispy_field }}
+                </div>
+                <div class="fieldWrapper">
+                    {{ form.description|as_crispy_field }}
+                </div><br>
+                <input type="submit" name="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var map = L.map('map').setView([53.2738, -9.0518], 6);
+
+        var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+                {
+                    maxZoom: 16,
+                    minZoom: 4
+                }).addTo(map);
+
+        function onMapClick(e) {
+          var lat = e.latlng.lat;
+          var lng = e.latlng.lng;
+
+          if (typeof marker != 'undefined') {
+              map.removeLayer(marker);  // delete previous marker
+              marker = L.marker([lat, lng]).addTo(map);  // add new marker
+          }
+          else {
+              marker = L.marker([lat, lng]).addTo(map);  // add new marker
+          }
+
+           $('#coordinates').val(lng + ',' + lat)
+        }
+
+        // call the onMapClick function when user click on map
+        map.on('click', onMapClick);
+    </script>
+{% endblock %}

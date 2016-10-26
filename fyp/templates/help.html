@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block jumbo %}
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-md-5">
+                    <h1>Find Your Location</h1>
+                    <p>This map will find your location for you. You may also
+                    search anywhere on earth if you wish</p>
+                </div>
+
+                <div class="col-md-7">
+                    <div id="map" style="height: 450px; width: 600px">
+
+                        <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+                        <script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js"></script>
+
+
+
+                        <script>
+
+                            var tempPoints = [
+                                [53.4333, -7.9500,1000.7345],
+                                [54.5970, -5.9300,110.3628],
+                                [54.9958, -7.3074,100.2647],
+                                [54.2667, -8.4833,400.2372],
+                                [53.2719, -9.0489,300.1113],
+                                [52.6653, -8.6238,100.2564],
+                                [51.8972, -8.4700,200.4244],
+                                [52.6477, -7.2561,600.3243],
+                                [52.3342, -6.4575,800.2383]
+                            ];
+
+                            var map = L.map('map').setView([53.2738, -9.0518], 6);
+
+                            L.tileLayer(
+                                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                maxZoom: 18,
+                            }).addTo(map);
+
+                            var heat = L.heatlayer(tempPoints,{
+                                radius: 30,
+                                blur: 15,
+                                maxZoom: 17,
+                            }).addTo(map);
+
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+
+        </div>
+    </div>
+
+{% endblock %}
